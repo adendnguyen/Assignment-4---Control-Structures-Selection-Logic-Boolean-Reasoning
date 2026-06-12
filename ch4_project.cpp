@@ -44,30 +44,29 @@
     taxAmount = subTotal * (taxRate/100);
     totalBill = subTotal + taxAmount;
 
-    
-    subTotal = (roomRate * numRooms)
-    
-    totalBill = subTotal * tax rate
-    
-
     switch(discountTier)
+         case 0:
+            print("Tier 0: 0% Discount: Fewer than 10 rooms") 
+            break
          case 1:
            print("Tier 1: 10% Discount: 10 Rooms or more") 
+           break
          case 2:
            print("Tier 2: 20% Discount: 20 Rooms or more") 
-         
+           break
          case 3:
-           print("Tier 3: No Discount: 30 Rooms or more") 
-
+           print("Tier 3: 30% Discount: 30 Rooms or more") 
+           break
         default:
            print("ERROR") 
+           break
     end switch      
 */
 
 #include <iostream>
 #include <iomanip>     
 #include <string>    
-#include <assert.h>  
+#include <cassert>  
 #include <cmath>
  
 using namespace std;
@@ -156,7 +155,7 @@ int main()
         discountTier = 0;
     }
     double discountedRate = roomRate * (1.0 - roomDiscountPercent);
-    if((numRooms >= DISCOUNT_TIER1) && (numNights >= MIN_NIGHTS_LOYALTY)) // relational operator && 
+    if((numRooms >= MIN_ROOMS_TIER1) && (numNights >= MIN_NIGHTS_LOYALTY)) // relational operator && 
     {
         discountedRate *= (1.0 - LOYALTY_DISCOUNT);
     }
@@ -173,7 +172,7 @@ int main()
             cout << "Tier 0: No discount: Customer booked fewer than 10 rooms" << endl;
             break;
          case 1:
-            cout << "Tier 1: 10%$ discount: Customer booked atleast 10 rooms" << endl;
+            cout << "Tier 1: 10% discount: Customer booked atleast 10 rooms" << endl;
            break;
          case 2:
            cout << "Tier 2: 20% discount: Customer booked atleast 20 rooms" << endl;
@@ -201,7 +200,7 @@ int main()
     
     if (discountTier == 0)
          cout << "Operator == demonstrated" << endl;
-    if (numRooms <= 0)
+    if (numRooms <= MIN_ROOMS_TIER1)
          cout << "Operator <= demonstrated" << endl;
     if (!(numNights < 1))
         cout << "Operator ! demonstrated" << endl;
@@ -257,7 +256,7 @@ cout << left << setw(30) << "Total before Tax:"
      << right << "$" << setw(12) << subTotal << endl;
 
 cout << left << setw(30) << "Sales Tax Amount:"
-     << right << setw(12) << taxRate << "%" << endl;
+     << right << "$" << setw(12) << taxAmount  << endl;
 
 cout << left << setw(30) << "Total after Tax:"
      << right << "$" << setw(12) << totalBill << endl;
@@ -287,7 +286,6 @@ Consistent braces are used for every conditional block.
 return 0;
 }
 /* Test Run #1
-
     Enter the nightly rate per room >> 101
     Enter the number of rooms >> 42
     Enter the number of nights >> 4
@@ -306,29 +304,30 @@ return 0;
     Rooms:                                   42
     Number of Nights:                         4
     Total before Tax:             $    11283.72
-    Sales Tax Amount:                     8.50%
+    Sales Tax Amount:             $      959.12
     Total after Tax:              $    12242.84
 */
 
 /* Test Run #2
-    Enter the nightly rate per room >> 304
-    Enter the number of rooms >> 10
-    Enter the number of nights >> 50
-    Enter the tax rate >> 10
-    Tier 1: 10%$ discount: Customer booked atleast 10 rooms
+    Enter the nightly rate per room >> 100
+    Enter the number of rooms >> 5
+    Enter the number of nights >> 3
+    Enter the tax rate >> 0
+    Tier 0: No discount: Customer booked fewer than 10 rooms
     Relational & Logical Operator Showcase 
-    Operator != demonstrated
+    Operator < demonstrated
+    Operator == demonstrated
+    Operator <= demonstrated
     Operator ! demonstrated
     Operator || demonstrated
-    Discount is effectively 10%.
     ========================================================
     HOTEL RECEIPT
     ========================================================
-    Nightly Rate:                 $      304.00
-    Discount Percent:                    10.00%
-    Rooms:                                   10
-    Number of Nights:                        50
-    Total before Tax:             $   129960.00
-    Sales Tax Amount:                    10.00%
-    Total after Tax:              $   142956.00
+    Nightly Rate:                 $      100.00
+    Discount Percent:                     0.00%
+    Rooms:                                    5
+    Number of Nights:                         3
+    Total before Tax:             $     1500.00
+    Sales Tax Amount:             $        0.00
+    Total after Tax:              $     1500.00
 */
